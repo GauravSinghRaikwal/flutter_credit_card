@@ -29,7 +29,7 @@ class CreditCardWidget extends StatefulWidget {
     required this.cardHolderName,
     required this.cvvCode,
     required this.showBackView,
-    required this.onCreditCardWidgetChange,
+    //required this.onCreditCardWidgetChange,
     this.bankName,
     this.animationDuration = AppConstants.defaultAnimDuration,
     this.height,
@@ -107,7 +107,7 @@ class CreditCardWidget extends StatefulWidget {
   final bool obscureCardCvv;
 
   /// Provides a callback any time there is a change in credit card brand.
-  final CCBrandChangeCallback onCreditCardWidgetChange;
+  //final CCBrandChangeCallback onCreditCardWidgetChange;
 
   /// Enable/disable card holder name. Defaults to false.
   final bool isHolderNameVisible;
@@ -287,10 +287,10 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
       _toggleSide(flipFromRight: false, showBackSide: widget.showBackView);
     }
 
-    final CreditCardBrand cardBrand = CreditCardBrand(
-      widget.cardType ?? detectCCType(widget.cardNumber),
-    );
-    widget.onCreditCardWidgetChange(cardBrand);
+    // final CreditCardBrand cardBrand = CreditCardBrand(
+    //   widget.cardType ?? detectCCType(widget.cardNumber),
+    // );
+   // widget.onCreditCardWidgetChange(cardBrand);
 
     return Stack(
       children: <Widget>[
