@@ -1,5 +1,8 @@
+
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/services/text_formatter.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 
 import '../flutter_credit_card.dart';
 import 'masked_text_controller.dart';
@@ -14,7 +17,6 @@ class CreditCardForm extends StatefulWidget {
     required this.expiryDate,
     required this.cardHolderName,
     required this.cvvCode,
-    required this.onCreditCardModelChange,
     required this.formKey,
     this.obscureCvv = false,
     this.obscureNumber = false,
@@ -63,7 +65,7 @@ class CreditCardForm extends StatefulWidget {
   final String numberValidationMessage;
 
   /// Provides callback when there is any change in [CreditCardModel].
-  final CCModelChangeCallback onCreditCardModelChange;
+ 
 
   /// When enabled cvv gets hidden with obscuring characters. Defaults to
   /// false.
@@ -152,8 +154,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
   bool isCvvFocused = false;
 
   late final CreditCardModel creditCardModel;
-  late final CCModelChangeCallback onCreditCardModelChange =
-      widget.onCreditCardModelChange;
+  
 
   late final MaskedTextController _cardNumberController = MaskedTextController(
     mask: AppConstants.cardNumberMask,
@@ -331,7 +332,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
 
   void textFieldFocusDidChange() {
     isCvvFocused = creditCardModel.isCvvFocused = cvvFocusNode.hasFocus;
-    onCreditCardModelChange(creditCardModel);
+    
   }
 
   void createCreditCardModel() {
@@ -352,7 +353,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
   void _onCardNumberChange(String value) {
     setState(() {
       creditCardModel.cardNumber = cardNumber = _cardNumberController.text;
-      onCreditCardModelChange(creditCardModel);
+     // onCreditCardModelChange(creditCardModel);
     });
   }
 
@@ -362,14 +363,14 @@ class _CreditCardFormState extends State<CreditCardForm> {
         expiry.startsWith(RegExp('[2-9]')) ? '0$expiry' : expiry;
     setState(() {
       creditCardModel.expiryDate = expiryDate = expiry;
-      onCreditCardModelChange(creditCardModel);
+     // onCreditCardModelChange(creditCardModel);
     });
   }
 
   void _onCvvChange(String text) {
     setState(() {
       creditCardModel.cvvCode = cvvCode = text;
-      onCreditCardModelChange(creditCardModel);
+    //  onCreditCardModelChange(creditCardModel);
     });
   }
 
@@ -377,7 +378,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
     setState(() {
       creditCardModel.cardHolderName =
           cardHolderName = _cardHolderNameController.text;
-      onCreditCardModelChange(creditCardModel);
+    //  onCreditCardModelChange(creditCardModel);
     });
   }
 
@@ -386,14 +387,14 @@ class _CreditCardFormState extends State<CreditCardForm> {
       FocusScope.of(context).requestFocus(cardHolderNode);
     } else {
       FocusScope.of(context).unfocus();
-      onCreditCardModelChange(creditCardModel);
+    //  onCreditCardModelChange(creditCardModel);
       widget.onFormComplete?.call();
     }
   }
 
   void _onHolderNameEditComplete() {
     FocusScope.of(context).unfocus();
-    onCreditCardModelChange(creditCardModel);
+  //  onCreditCardModelChange(creditCardModel);
     widget.onFormComplete?.call();
   }
 }
